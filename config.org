@@ -33,14 +33,32 @@ All future code blocks will be of a similar form:
   (setq use-package-always-ensure t)
 #+end_src
 
-** Built-in Customisations.
+** Built-in Customisations - Step 1.
 The first settings implemented are those that don't require any
 packages installed. The changes are largely about removing unnecessary
 parts of the Emacs window such as the menu bar and toolbar.
+# Clean up Emacs window removing the menu bar, tool bar and scroll bar.
 #+begin_src emacs-lisp
   (menu-bar-mode 0)			; Turn off menu bar (file/edit)
   (tool-bar-mode 0)			; Turn off icons
   (blink-cursor-mode 0)			; Stop cursor blinking
   (scroll-bar-mode 0)			; Where we're going we don't need no scroll bar
   (display-time-mode 1)			; add clock into mode-line
+#+end_src
+Having switched off the unnecessary bits of the Emacs window what we
+are left with is a much simpler interface.
+** Built-in Customisations - Step 2.
+The information displayed on starting Emacs varies depending on how
+you enter the program. I have got in the habit of using Emacs Client
+which is much faster to start subsequent windows, but which doesn't
+display a splash screen. 
+If starting Emacs with the 'normal' command a splash screen is, by
+default, displayed. As I've just started the program I don't really
+need this information, so I switch it off and display a piece of text
+which is different for each platform I'm using. This was initially
+done as a test of detecting which machine is being used in case I want
+to specify different packages on different machines (currently I don't).
+# Don't Display the Splash-Screen on Start-up.
+#+begin_src emacs-lisp
+  (setq inhibit-startup-message t)	; Splash screen disabled
 #+end_src
