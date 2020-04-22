@@ -76,3 +76,9 @@ attractive in the process.
   ;; https://old.reddit.com/r/emacs/comments/g3otv4/packages_for_creative_writing/
   ;; Discussion is about using Emacs to write rather than code.
 #+end_src
+** Built-in Customisation - Step 4.
+Highlight the current line so it is easier to follow the text.
+# Highlight the current line
+#+begin_src emacs-lisp
+  (global-hl-line-mode 1)			; highlight current line
+#+end_src
