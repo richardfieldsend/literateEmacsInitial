@@ -1,0 +1,33 @@
+# Configuration file - Built Using Org-Mode.
+* Configuration file.
+This file is used for all the settings used in my Emacs setup. The
+file is built using Org-Mode which supports literate programming (a
+concepy originally described by Donald Knuth, the Father of LaTeX). It
+takes the concept of writing comments in your code and turns it on its
+head, instead imagining a world where you write prose describing what
+you are trying to achieve and how you plan on getting there, and then
+you add code into the prose using code blocks.
+
+In the case of Emacs, these code blocks can be in many different
+languages but for the configuration file this will be Emacs Lisp
+(elisp). The first block is required in order to set up the various
+repositories (MELPA and ELPA) that will be used for the various
+packages. This follows a discussion on Reddit here:
+
+https://old.reddit.com/r/emacs/comments/dfcyy6/how_to_install_and_use_usepackage/
+
+All future code blocks will be of a similar form:
+
+#+begin_src emacs-lisp
+(eval-and-compile)
+(require 'package)
+(setq package-archives '(("elpa" . "https://elpa.gnu.org/packages/")
+("melpa" . "https://melpa.org/packages/")
+("gnu" . "https://elpa.gnu.org/packages")))
+(package-initialize)
+(package-refresh-contents)
+(unless (package-installed-p 'use-package)
+(package-install 'use-package))
+(require 'use-package)
+(setq use-package-always-ensure t)
+#+end_src
