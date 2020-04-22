@@ -62,3 +62,17 @@ to specify different packages on different machines (currently I don't).
 #+begin_src emacs-lisp
   (setq inhibit-startup-message t)	; Splash screen disabled
 #+end_src
+** Built-in Customisations - Step 3.
+In a recent discussion on Reddit about using Emacs for creative
+writing there was a suggestion for a suitable font setup. Given that I
+aim to use Emacs to write lots of text I would like it to be fairly
+attractive in the process.
+# Set a nicer font
+#+begin_src emacs-lisp
+  (variable-pitch-mode 1)			; for variable width font
+  (visual-line-mode 1)
+  (face-spec-set 'variable-pitch '((t :family "FreeSans")))
+  ;; Taken from the following Reddit thread:
+  ;; https://old.reddit.com/r/emacs/comments/g3otv4/packages_for_creative_writing/
+  ;; Discussion is about using Emacs to write rather than code.
+#+end_src
