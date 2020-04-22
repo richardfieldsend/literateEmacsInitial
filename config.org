@@ -1,5 +1,6 @@
 # Configuration file - Built Using Org-Mode.
 * Configuration file.
+** Add Repositories and Configure Use Package Settings.
 This file is used for all the settings used in my Emacs setup. The
 file is built using Org-Mode which supports literate programming (a
 concepy originally described by Donald Knuth, the Father of LaTeX). It
@@ -19,15 +20,27 @@ https://old.reddit.com/r/emacs/comments/dfcyy6/how_to_install_and_use_usepackage
 All future code blocks will be of a similar form:
 
 #+begin_src emacs-lisp
-(eval-and-compile)
-(require 'package)
-(setq package-archives '(("elpa" . "https://elpa.gnu.org/packages/")
-("melpa" . "https://melpa.org/packages/")
-("gnu" . "https://elpa.gnu.org/packages")))
-(package-initialize)
-(package-refresh-contents)
-(unless (package-installed-p 'use-package)
-(package-install 'use-package))
-(require 'use-package)
-(setq use-package-always-ensure t)
+  (eval-and-compile)
+  (require 'package)
+  (setq package-archives '(("elpa" . "https://elpa.gnu.org/packages/")
+  ("melpa" . "https://melpa.org/packages/")
+  ("gnu" . "https://elpa.gnu.org/packages")))
+  (package-initialize)
+  (package-refresh-contents)
+  (unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+  (require 'use-package)
+  (setq use-package-always-ensure t)
+#+end_src
+
+** Built-in Customisations.
+The first settings implemented are those that don't require any
+packages installed. The changes are largely about removing unnecessary
+parts of the Emacs window such as the menu bar and toolbar.
+#+begin_src emacs-lisp
+  (menu-bar-mode 0)			; Turn off menu bar (file/edit)
+  (tool-bar-mode 0)			; Turn off icons
+  (blink-cursor-mode 0)			; Stop cursor blinking
+  (scroll-bar-mode 0)			; Where we're going we don't need no scroll bar
+  (display-time-mode 1)			; add clock into mode-line
 #+end_src
