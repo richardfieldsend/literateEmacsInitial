@@ -1,6 +1,6 @@
-# Configuration file - Built Using Org-Mode.
-* Configuration file.
-** Add Repositories and Configure Use Package Settings.
+* Configuration file Using Org-Mode.
+** Initial Setup Of Repositories.
+*** Add Repositories and Configure Use Package Settings.
 This file is used for all the settings used in my Emacs setup. The
 file is built using Org-Mode which supports literate programming (a
 concepy originally described by Donald Knuth, the Father of LaTeX). It
@@ -33,7 +33,8 @@ All future code blocks will be of a similar form:
   (setq use-package-always-ensure t)
 #+end_src
 
-** Built-in Customisations - Step 1.
+** Configuration Using Built-in Functions.
+*** Built-in Customisations - Cleaning the Window.
 The first settings implemented are those that don't require any
 packages installed. The changes are largely about removing unnecessary
 parts of the Emacs window such as the menu bar and toolbar.
@@ -47,7 +48,7 @@ parts of the Emacs window such as the menu bar and toolbar.
 #+end_src
 Having switched off the unnecessary bits of the Emacs window what we
 are left with is a much simpler interface.
-** Built-in Customisations - Step 2.
+*** Built-in Customisations - Switch off splash screen
 The information displayed on starting Emacs varies depending on how
 you enter the program. I have got in the habit of using Emacs Client
 which is much faster to start subsequent windows, but which doesn't
@@ -62,23 +63,62 @@ to specify different packages on different machines (currently I don't).
 #+begin_src emacs-lisp
   (setq inhibit-startup-message t)	; Splash screen disabled
 #+end_src
-** Built-in Customisations - Step 3.
+*** Built-in Customisations - Nice Font.
 In a recent discussion on Reddit about using Emacs for creative
 writing there was a suggestion for a suitable font setup. Given that I
 aim to use Emacs to write lots of text I would like it to be fairly
 attractive in the process.
 # Set a nicer font
 #+begin_src emacs-lisp
+  (set-face-attribute 'default nil
+  :font "Inconsolata Medium"
+  :height 85)				; found by experimentation.
+#+end_src
+
++begin_src emacs-lisp
   (variable-pitch-mode 1)			; for variable width font
   (visual-line-mode 1)
   (face-spec-set 'variable-pitch '((t :family "FreeSans")))
   ;; Taken from the following Reddit thread:
   ;; https://old.reddit.com/r/emacs/comments/g3otv4/packages_for_creative_writing/
   ;; Discussion is about using Emacs to write rather than code.
-#+end_src
-** Built-in Customisation - Step 4.
++end_src
+*** Built-in Customisations - Highlight the current line.
 Highlight the current line so it is easier to follow the text.
 # Highlight the current line
 #+begin_src emacs-lisp
   (global-hl-line-mode 1)			; highlight current line
+#+end_src
+*** Built-in Customisations - Global line numbering.
+As the files get longer it is useful to be able to refer to the line
+number as a quick method of navigating the file. To navigate to a
+specific like type M-g M-g (goto line) and then enter the number
+required. 
+#+begin_src emacs-lisp
+  (global-linum-mode t)			; line numbering on.
+#+end_src
+** Configuration Using Package Functions.
+*** Package recentf - Re-open recently visited files.
+A frequent use-case for any text editor is to re-open a file
+repeatedly. Emacs can maintain a list of previously opened files in
+order to make them available for revisiting.
+
+Keyboard shortcuts for recentf:
+C-x C-r - Open the list of recent files.
+#+begin_src emacs-lisp
+  (use-package recentf
+  :config
+  (setq recentf-save-file "~/.Backups/recentf")
+  recentf-max-saved-items 500
+  recentf-max-menu-items 50
+  (recentf-mode +1)
+  (global-set-key (kbd "C-x C-r") 'recentf-open-files))
+#+end_src
+*** Package Colour Theme - Colour Scheme
+Install a colour theme using use-package.
+#+begin_src emacs-lisp
+  (use-package zenburn-theme
+  :ensure t
+  :config
+  (load-theme 'zenburn t))
 #+end_src
