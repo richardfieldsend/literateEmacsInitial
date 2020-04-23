@@ -116,9 +116,38 @@ C-x C-r - Open the list of recent files.
 #+end_src
 *** Package Colour Theme - Colour Scheme
 Install a colour theme using use-package.
+There are many, many themes available, and I like to change them once
+in a while, but the current one (Zenburn) is a fairly dark one with
+muted font colour which is quite nice. 
+
 #+begin_src emacs-lisp
   (use-package zenburn-theme
   :ensure t
   :config
   (load-theme 'zenburn t))
+#+end_src
+*** Package Rainbow Delimiters - Coloured Brackets.
+Emacs uses Lisp for its extensible code, and one thing that becomes
+very obvious once you start playing with Lisp is that it is very
+bracket heavy. Keeping track of the opening and closing of these
+brackets, braces and the like can be difficult, and there are a couple
+of functions within this configuration that are here to help. The
+first, this one, is to use coloured bracket pairs. Each opening
+bracket will be in a different colour, and the relevant closing
+bracket will be in the appropriate, matching colour.
+#+begin_src emacs-lisp
+  (use-package rainbow-delimiters		; Install the package
+  :ensure t
+  :init
+  :config (add-hook #'prog-mode-hook 'rainbow-delimiters-mode)
+  :config (add-hook #'LaTeX-mode-hook 'rainbow-delimiters-mode)
+  :config (add-hook #'text-mode-hook 'rainbow-delimiters-mode)
+  :config (add-hook #'org-mode-hook 'rainbow-delimiters-mode)
+  ;; The colouring of pairs of brackets is useful, but the rest of this
+  ;; function aids adding balanced brackets by inserting brackets in
+  ;; pairs automatically.
+  :config (add-hook 'prog-mode-hook 'electric-pair-mode)
+  :config (add-hook 'LaTeX-mode-hook 'electric-pair-mode)
+  :config (add-hook 'text-mode-hook 'electric-pair-mode)
+  :config (add-hook 'org-mode-hook 'electric-pair-mode))
 #+end_src
