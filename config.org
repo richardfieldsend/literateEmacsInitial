@@ -69,16 +69,18 @@ writing there was a suggestion for a suitable font setup. Given that I
 aim to use Emacs to write lots of text I would like it to be fairly
 attractive in the process.
 # Set a nicer font
+
 #+begin_src emacs-lisp
   (set-face-attribute 'default nil
   :font "Inconsolata Medium"
-  :height 85)				; found by experimentation.
+  :height 75)				; found by experimentation.
 #+end_src
 
 +begin_src emacs-lisp
   (variable-pitch-mode 1)			; for variable width font
   (visual-line-mode 1)
-  (face-spec-set 'variable-pitch '((t :family "FreeSans")))
+  (face-spec-set 'variable-pitch '((t :family "System San Francisco Display")))
+;;  (face-spec-set 'variable-pitch '((t :family "Fira Mono")))
   ;; Taken from the following Reddit thread:
   ;; https://old.reddit.com/r/emacs/comments/g3otv4/packages_for_creative_writing/
   ;; Discussion is about using Emacs to write rather than code.
@@ -96,6 +98,40 @@ specific like type M-g M-g (goto line) and then enter the number
 required. 
 #+begin_src emacs-lisp
   (global-linum-mode t)			; line numbering on.
+#+end_src
+*** Built-in Customisations - Scratch buffer text.
+I run Emacs on a number of different machines, and I like to have
+different text displayed in the scratch buffer depending on which
+machine is being used. This was originally a way of testing ways of
+detecting which machine is being used with the intention of modifying
+which packages are installed on the basis of the machine in question.
+
+The four machines of interest are:
+
+- iMac - Psychology (psychol-ford)
+- Avantek desktop ()
+- Dell Latitude E5500 laptop (ziggy-latitude)
+- Raspberry Pi 2B (ziggypi)
+
+Emacs can select code to run on the basis of system name using a
+lookup on the variable 'system name'. According to the variable
+description, system-name is defined in 'C Source Code', but this
+variable is obsolete in Emacs after version 25.1. Use (system-name)
+instead.
+
+#+begin_src emacs-lisp
+  ;; ziggy-latitude - my home laptop:
+  (if (string=(system-name) "ziggy-latitude")
+  (setq initial-scratch-message
+  "I use Emacs, which might be thought of as a thermonuclear word processor.\n\n\tNeal Stephenson - In the Beginning... Was the Command Line"))
+  ;; psychol-ford (Psychology)
+  (if (string=(system-name) "psychol-ford")
+  (setq initial-scratch-message
+  "'Space,' it says,'is big. Really big. You just won't believe how vastly, hugely, mindbogglingly big it is.\nI mean, you may think it's a long way down the road to the chemist, but that's just peanuts to space.'\n\nHitch Hiker's Guide To The Galaxy\n\t Douglas Adams."))
+  ;; plantsci-cowin01
+  (if (string=(system-name) "plantsci-cowin01")
+  (setq initial-scratch-message
+  "The most exciting phrase to hear in science, the one that heralds the most discoveries is\nnot 'Eureka!' (I have found it!) but 'That's funny...'\n\nIsaac Asimov"))
 #+end_src
 ** Configuration Using Package Functions.
 *** Package recentf - Re-open recently visited files.
@@ -116,9 +152,71 @@ C-x C-r - Open the list of recent files.
 #+end_src
 *** Package Colour Theme - Colour Scheme
 Install a colour theme using use-package.
-#+begin_src emacs-lisp
++begin_src emacs-lisp
   (use-package zenburn-theme
   :ensure t
   :config
   (load-theme 'zenburn t))
++end_src
+*** Package Rainbow Delimiters - Colour Paired Brackets
+Many programming languages rely on brackets to group things together,
+and Lisp dialects are especially dependent on this usage. The
+following sets up a package for rainbow delimiters which makes it
+easier to check that delimiters are paired. The second section
+activates the electric pair mode which puts in the second member of
+each pair automatically but leaves the cursor in the middle of the
+pair so you can add the contents of the brackets.
+#+begin_src emacs-lisp
+  (use-package rainbow-delimiters
+  :config (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+  :config (add-hook 'LaTeX-mode-hook 'rainbow-delimiters-mode)
+  :config (add-hook 'text-mode-hook 'rainbow-delimiters-mode)
+  :config (add-hook 'org-mode-hook 'rainbow-delimiters-mode)
+  :config (add-hook 'prog-mode-hook 'electric-pair-mode)
+  :config (add-hook 'LaTeX-mode-hook 'electric-pair-mode)
+  :config (add-hook 'text-mode-hook 'electric-pair-mode)
+  :config (add-hook 'org-mode-hook 'electric-pair-mode))
+#+end_src
+*** Package Doom Modeline - pretty modeline
+The standard mode line is okay, but this is Emacs, so why be satisfied
+with okay when you can have something a lot nicer. The indicator for
+the file type being edited relies on the installation of the
+'all-the-icons' package before the modeline. And the themes for the
+modeline are then installed as well.
+#+begin_src emacs-lisp
+  (use-package all-the-icons)		; Install all the icons.
+  (use-package doom-modeline		; Install doom-modeline
+  :hook (after-init . doom-modeline-mode)
+  :config (setq doom-modeline-icon t))	; Line required to trigger file type icon in  modeline.
+  (use-package doom-themes
+  :config (load-theme 'doom-molokai t))
+#+end_src
+*** Package Minimap Mode - Overview of file in tiny text
+This function opens a narrow side window which shows a mini version of
+the text. It can be useful to see the 'shape' of the file. This
+switches on the function for TeX, LaTeX and Programming.
+
+#+begin_src emacs-lisp
+  (use-package minimap			; Minimap mode
+  :config (setq minimap-major-modes '(tex-mode LaTeX-mode prog-mode))
+  :config (minimap-mode 1))
+#+end_src
+This function could probably be fiddled with as the tiny text is
+really, really tiny.
+*** Package Org-mode Fancy Bullets - Pretty Bullets for Org mode
+The heading levels in Org-mode are created by multiple asterisks. It
+gets long, so replace the long strings of stars with pretty bullets.
+#+begin_src emacs-lisp
+  (use-package org-bullets
+  :config (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))		;
+#+end_src
+*** Package Fireplace - The warm glow of using the one true editor
+One of those completely silly and unnecessary packages. All it does is
+display a fire animation. 
+#+begin_src emacs-lisp
+  (use-package fireplace)
+#+end_src
+*** Package Dired Git Info - show Git information in dired buffer
+#+begin_src emacs-lisp
+  (use-package dired-git-info)
 #+end_src
