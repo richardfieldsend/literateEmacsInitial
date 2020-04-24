@@ -241,3 +241,38 @@ display a fire animation.
 #+begin_src emacs-lisp
   (use-package dired-git-info)
 #+end_src
+*** Package Magit - Version Control within Emacs
+**** Package Dash - Required by Magit.
+#+begin_src emacs-lisp
+  (use-package dash)
+#+end_src
+**** Package Diminish - Required by Magit.
+#+begin_src emacs-lisp
+  (use-package diminish)
+#+end_src
+**** Package Magit-pop-up - Required by Magit.
+#+begin_src emacs-lisp
+  (use-package magit-popup)
+#+end_src
+**** Package With-Editor - Required by Magit.
+#+begin_src emacs-lisp
+  (use-package with-editor)
+#+end_src
+**** Package ghub - GitHub integration (required by Magit)
+#+begin_src emacs-lisp
+  (use-package ghub)
+#+end_src
+Having installed the pre-requisites for the Magit, it is now time to
+install the package itself.
+**** Package Magit - The package itself.
+#+begin_src emacs-lisp
+  (use-package magit
+  :config (global-set-key (kbd "C-x g") 'magit-status))
+#+end_src
+**** Package Magit Documentation - Good to know.
+#+begin_src emacs-lisp
+  (with-eval-after-load 'info
+  (info-initialize)
+  (add-to-list 'Info-directory-list
+  "~/.emacs.d/elpa/magit-2.90.1/dir/"))
+#+end_src
