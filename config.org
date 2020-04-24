@@ -99,6 +99,20 @@ required.
 #+begin_src emacs-lisp
   (global-linum-mode t)			; line numbering on.
 #+end_src
+*** Built-in Customisations - Transparency for Emacs.
+One of the most popular look and feel tweaks that almost everyone
+seems to want is some transparency. On my machine the terminal windows
+have transparency, and so it is nice to have this functionality on
+Emacs too. This doesn't require any special packages in Emacs, though
+I think it does require the Compton compositor to be installed an
+running (other compositors are available, but Compton is the
+lightweight option).
+#+begin_src emacs-lisp
+  (set-frame-parameter (selected-frame) 'alpha '(85 50))
+  (add-to-list 'default-frame-alist '(alpha 85 50))
+#+end_src
+The values 85/50 can be tweaked as required to increase or decrease
+opacity, but these numbers work with a lot of wallpapers.
 *** Built-in Customisations - Scratch buffer text.
 I run Emacs on a number of different machines, and I like to have
 different text displayed in the scratch buffer depending on which
