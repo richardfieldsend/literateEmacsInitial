@@ -52,7 +52,7 @@ are left with is a much simpler interface.
 The information displayed on starting Emacs varies depending on how
 you enter the program. I have got in the habit of using Emacs Client
 which is much faster to start subsequent windows, but which doesn't
-display a splash screen. 
+display a splash screen.
 If starting Emacs with the 'normal' command a splash screen is, by
 default, displayed. As I've just started the program I don't really
 need this information, so I switch it off and display a piece of text
@@ -95,7 +95,7 @@ Highlight the current line so it is easier to follow the text.
 As the files get longer it is useful to be able to refer to the line
 number as a quick method of navigating the file. To navigate to a
 specific like type M-g M-g (goto line) and then enter the number
-required. 
+required.
 #+begin_src emacs-lisp
   (global-linum-mode t)			; line numbering on.
 #+end_src
@@ -175,7 +175,7 @@ stop the number getting too ridiculous though.
 *** TODO - check information on the way backup works.
 This should now generate backup files in a hidden directory where they
 can be retrieved if required.
-*** Built-in Customisations - Saved History Configuration. 
+*** Built-in Customisations - Saved History Configuration.
 Inspired by Sacha Chua's writings on C3F (Creation and Conservation of
 Computer Files) and the linked page here:
 
@@ -199,7 +199,18 @@ approach of save often is quite reasonable.
 This configuration saves the history in a file in the same backup
 folder as above. This is a good location as the folder is hidden from
 day to day view.
-** Configuration Using Package Functions.
+*** Built-in Customisations - White Space Trimming.
+When writing for extended periods in Emacs there is a likelihood that
+extra lines will get added to the file. To tidy up after itself Emacs
+can trim excess lines from the end of the file.
+#+begin_src emacs-lisp
+  (add-hook 'before-save-hook 'delete-trailing-whitespace) ; Remove any excess lines.
+#+end_src
+This function removes any extra lines at the end of the document. I
+did take a look at having a way of removing any double spacing in the
+document, given that this is somehow considered not the right thing
+any more, but I haven't been able to do this yet.
+ ** Configuration Using Package Functions.
 *** Package recentf - Re-open recently visited files.
 A frequent use-case for any text editor is to re-open a file
 repeatedly. Emacs can maintain a list of previously opened files in
@@ -220,7 +231,7 @@ C-x C-r - Open the list of recent files.
 Install a colour theme using use-package.
 There are many, many themes available, and I like to change them once
 in a while, but the current one (Zenburn) is a fairly dark one with
-muted font colour which is quite nice. 
+muted font colour which is quite nice.
 
 #+begin_src emacs-lisp
   (use-package zenburn-theme
@@ -282,7 +293,7 @@ gets long, so replace the long strings of stars with pretty bullets.
 #+end_src
 *** Package Fireplace - The warm glow of using the one true editor
 One of those completely silly and unnecessary packages. All it does is
-display a fire animation. 
+display a fire animation.
 #+begin_src emacs-lisp
   (use-package fireplace)
 #+end_src
