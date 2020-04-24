@@ -303,5 +303,5 @@ install the package itself.
   (info-initialize)
   (add-to-list 'Info-directory-list
   "~/.emacs.d/elpa/magit-2.90.1/dir/"))
->>>>>>> lookAndFeel
+
 #+end_src
