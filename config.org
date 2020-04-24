@@ -147,6 +147,13 @@ instead.
   (setq initial-scratch-message
   "The most exciting phrase to hear in science, the one that heralds the most discoveries is\nnot 'Eureka!' (I have found it!) but 'That's funny...'\n\nIsaac Asimov"))
 #+end_src
+*** Built-in Customisations - Set Default Major Mode to Text.
+Some of the customisations made in this file don't get applied unless
+the mode is correctly set. If it isn't set in any other way it will
+normally default to 'fundamental', but text is better for my purposes.
+#+begin_src emacs-lisp
+  (setq-default major-mode 'text-mode)
+#+end_src
 ** Configuration Using Package Functions.
 *** Package recentf - Re-open recently visited files.
 A frequent use-case for any text editor is to re-open a file
