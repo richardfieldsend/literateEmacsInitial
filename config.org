@@ -154,6 +154,51 @@ normally default to 'fundamental', but text is better for my purposes.
 #+begin_src emacs-lisp
   (setq-default major-mode 'text-mode)
 #+end_src
+*** Built-in Customisations - Save backup files to separate folder.
+By default Emacs creates backup files of those being edited by simply
+adding a tilde (~) to the filename and placing the file in the same
+folder. Placing the files in a single backup directory and keeping
+multiple versions gives the option of stepping back through the
+various versions if required. Text files, whether programs or prose
+are, relative to modern storage devices, pretty small, so there is no
+downside to keeping lots of copies of files. The configuration should
+stop the number getting too ridiculous though.
+#+begin_src emacs-lisp
+  (setq backup-directory-alist '(("." . "~/.Backups/"))) ; Hidden backup folder.
+  (setq delete-old-versions t)			       ; delete old versions silently
+  (setq kept-new-versions 6)			       ; no. of newer files to keep
+  (setq kept-old-versions 2)			       ; no. of older files to keep
+  (setq version-control t)			       ; create numbered backups
+  (setq vc-make-backup-files t)			       ; backup even files which are under version control
+  (setq auto-save-file-name-transforms '((".*" "~/.Backups/" t))) ; uniquify saved file names
+#+end_src
+*** TODO - check information on the way backup works.
+This should now generate backup files in a hidden directory where they
+can be retrieved if required.
+*** Built-in Customisations - Saved History Configuration. 
+Inspired by Sacha Chua's writings on C3F (Creation and Conservation of
+Computer Files) and the linked page here:
+
+https://www.wisdomandwonder.com/wp-content/uploads/2014/03/C3F.html
+
+As noted in the description for the backup settings, above, modern
+storage devices are vast, and text files are usually small, especially
+when compared to image, sound and video files. As this is the case, an
+approach of save often is quite reasonable.
+#+begin_src emacs-lisp
+  (setq savehist-file "~/.Backups/savehist")
+  (savehist-mode 1)
+  (setq history-length t)
+  (setq history-delete-duplicates t)
+  (setq savehist-save-minibuffer-history 1)
+  (setq savehist-additional-variables
+  '(kill-ring
+  search-ring
+  regexp-search-ring))
+#+end_src
+This configuration saves the history in a file in the same backup
+folder as above. This is a good location as the folder is hidden from
+day to day view.
 ** Configuration Using Package Functions.
 *** Package recentf - Re-open recently visited files.
 A frequent use-case for any text editor is to re-open a file
