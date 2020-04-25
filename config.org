@@ -613,6 +613,42 @@ the buffer you want and the filtering kicks in.
 Note that the Helm configuration makes reference to using Diminish,
 this is already installed as part of my Magit installation. 
 
+*** Package Helm Spotify Plus - Control Spotify from within Emacs.
+When you're hacking in Emacs and listening to some toonz then do you
+need to move to Spotify to control Spotify. You can scan for tracks,
+play, pause, go back to beginning of track or go to the next one.
+
+- C-c s s - Helm Spotify Plus (will ask for search terms)
+- C-c s f - forward a track
+- C-c s b - back to beginning of track
+- C-c s p - play track
+- C-c s g - pause (C-g is a popular Emacs quit combination)
+
+To start playing use C-c s s, you'll be asked for the search term, a
+list of tracks will be displayed. Select the track you want and hit
+return.
+
+The search can be free text, artist, track or market and any
+combination of these:
+
+- chumbawamba - no identifier, the search is free text
+- a:chumbawamba - artist search
+- t:timebomb - track search
+- a:bragg t:levi - both artist and track
+- a:bragg m:US - artist and market
+
+If the list is extensive then select a result and hit tab to get a
+list of possible actions. These include options like listening to the
+album.
+
+#+begin_src emacs-lisp
+	  (use-package helm-spotify-plus
+	    :config (global-set-key (kbd "C-c s s") 'helm-spotify-plus)
+	    :config (global-set-key (kbd "C-c s f") 'helm-spotify-plus-next)
+	    :config (global-set-key (kbd "C-c s b") 'helm-spotify-plus-previous)
+	    :config (global-set-key (kbd "C-c s p") 'helm-spotify-plus-play)
+	    :config (global-set-key (kbd "C-c s g") 'helm-spotify-plus-pause))
+#+end_src
 *** Package Palimpsest - Edits moved to external files or the end of the file.
 In the age where purchasing paper is easy and cheap, it is easy to
 forget what a valuable commodity good stationery once was. A
