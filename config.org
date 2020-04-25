@@ -401,6 +401,23 @@ I have re-enabled the titles on windows in i3).
 #+begin_src emacs-lisp
 (setq frame-title-format '("Emacs - Buffer: %b : File: %f : Mode: %m"))
 #+end_src
+*** Built-in Customisations - Bookmarks for Emacs.
+Multiple bookmarks can be set to help you find your way back to a
+particular file and location in that file. The only customisation I am
+employing is to save the bookmarks file to my Dropbox so that it is
+available on all my computers.
+#+begin_src emacs-lisp
+  (set 'bookmark-default-file "~/Dropbox/.bookmarks")
+  (add-hook 'before-save-hook 'bookmark-save) ; Remove any excess lines.
+#+end_src
+I have added an extra line from previous versions of this file to add
+a 'before saving the file' hook which will save the bookmarks file.
+
+The commands for using the bookmarks are:
+- C-x r m - Mark the current location as a bookmark.
+- C-x r b - Jump to a bookmark
+- C-x r l - List the available bookmarks
+
 ** Configuration Using Package Functions.
 *** Package recentf - Re-open recently visited files.
 A frequent use-case for any text editor is to re-open a file
