@@ -679,6 +679,16 @@ C-c C-q - move selected text to the relevant trash file.
 The external filename for saving the moved text is the existing file
 name with the text 'trash.' inserted between the filename and the
 filetype extension.
+*** Package Achievements - Track your usage of Emacs and your Skillz.
+#+begin_src emacs-lisp
+  (use-package achievements
+    :config (require 'achievements))
+#+end_src
+To check what achievements are available, and which have been achieved
+run:
+
+achievements-list-achievements
+
 ** Configuration - Notes On Emacs Usage Outside of Individual Packages.
 *** Emacs Server Usage.
 When Emacs is first started it can take some moments to fire up. This,
