@@ -385,6 +385,22 @@ blocks.
 The function was found in a question and answer on Stack Overflow
 here:
 https://stackoverflow.com/questions/15773354/indent-code-in-org-babel-src-blocks
+*** Built-in Customisations - Better Frame Title.
+Emacs does a lot of things to tell you what file you are editing, what
+mode you are in and the like. This information is usually available on
+the modeline. The following code block changes the frame title from
+the normal, generic  'emacs@machinename' to something more useful. In
+this case:
+
+Emacs - Buffer: <buffername> : File : <filename including path> : Mode
+<major mode in use>.
+
+I may modify this at some point (it has only become relevant again as
+I have re-enabled the titles on windows in i3).
+
+#+begin_src emacs-lisp
+(setq frame-title-format '("Emacs - Buffer: %b : File: %f : Mode: %m"))
+#+end_src
 ** Configuration Using Package Functions.
 *** Package recentf - Re-open recently visited files.
 A frequent use-case for any text editor is to re-open a file
