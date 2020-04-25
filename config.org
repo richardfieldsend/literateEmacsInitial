@@ -210,7 +210,7 @@ This function removes any extra lines at the end of the document. I
 did take a look at having a way of removing any double spacing in the
 document, given that this is somehow considered not the right thing
 any more, but I haven't been able to do this yet.
- ** Configuration Using Package Functions.
+** Configuration Using Package Functions.
 *** Package recentf - Re-open recently visited files.
 A frequent use-case for any text editor is to re-open a file
 repeatedly. Emacs can maintain a list of previously opened files in
@@ -238,7 +238,7 @@ muted font colour which is quite nice.
   :ensure t
   :config
   (load-theme 'zenburn t))
-+end_src
+#+end_src
 *** Package Rainbow Delimiters - Colour Paired Brackets
 Many programming languages rely on brackets to group things together,
 and Lisp dialects are especially dependent on this usage. The
