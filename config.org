@@ -579,6 +579,37 @@ the buffer you want and the filtering kicks in.
 #+end_src
 Note that the Helm configuration makes reference to using Diminish,
 this is already installed as part of my Magit installation. 
+
+*** Package Palimpsest - Edits moved to external files or the end of the file.
+In the age where purchasing paper is easy and cheap, it is easy to
+forget what a valuable commodity good stationery once was. A
+palimpsest is a manuscript where an older piece of writing has been
+incompletely removed, and can still be read. It most often occurs with
+papyrus or vellum.
+
+The Emacs Palimpsest mode provides a method for removing text from a
+document and either saving it to an external file with a suitable
+name, from which it can be recovered if required later, or the text
+can be moved wholesale to the end of the document.
+
+The key combinations for using the Palimpsests are:
+
+C-c C-r - move selected text to the end of the file.
+C-c C-q - move selected text to the relevant trash file.
+
+#+begin_src emacs-lisp
+  (use-package palimpsest
+    :config (add-hook 'text-mode-hook 'palimpsest-mode)
+    :config (add-hook 'prog-mode-hook 'palimpsest-mode)
+    :config (add-hook 'LaTeX-mode-hook 'palimpsest-mode)
+    :config (add-hook 'latex-mode-hook 'palimpsest-mode)
+    :config (add-hook 'org-mode-hook 'palimpsest-mode)
+    :config (add-hook 'fundamental-mode-hook 'palimpsest-mode)
+)
+#+end_src
+The external filename for saving the moved text is the existing file
+name with the text 'trash.' inserted between the filename and the
+filetype extension.
 ** Configuration - Notes On Emacs Usage Outside of Individual Packages.
 *** Emacs Server Usage.
 When Emacs is first started it can take some moments to fire up. This,
