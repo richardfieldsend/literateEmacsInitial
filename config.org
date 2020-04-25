@@ -215,6 +215,58 @@ Save time and keystrokes using y/n rather than yes/no.
 #+begin_src emacs-lisp
   (fset 'yes-or-no-p 'y-or-n.p)
 #+end_src
+*** Built-in Customisations - Word wrapping for all the modes.
+TODO - add the text
+#+begin_src emacs-lisp
+  (add-hook 'text-mode-hook 'turn-on-auto-fill)
+  (add-hook 'LaTeX-mode-hook 'turn-on-auto-fill)
+  (add-hook 'latex-mode-hook 'turn-on-auto-fill)
+  (add-hook 'org-mode-hook 'turn-on-auto-fill)
+  (add-hook 'emacs-lisp-mode-hook 'turn-on-auto-fill)
+  (add-hook 'fundamental-mode-hook 'turn-on-auto-fill)
+  (add-hook 'prog-mode-hook 'turn-on-auto-fill)
+#+end_src
+*** Built-in Customisations - Time stamping files when saved.
+The Magit functionality which supports the use of Git provides a good
+way of tracking file changes. However, with some files it may also be
+useful to have a record of when a file is changed, and who by. This
+function requires a suitable tagged text entry in the first 8 lines of
+a file. The two supported tags are:
+
+- Time-stamp: " "
+
+and
+
+- Time-stamp: < >
+
+In both cases a space is required when the tag is created. Once
+activated, saving the file will update the delimited space to insert a
+time, date and username entry which will update whenever the file is
+updated. The fact that the tag updates whenever the file is saved
+means that it is always flagged up as a line which changes if using
+Git, so my feeling is that it is better to either use Git or the
+Time-stamp, not both. It is possible to change the time stamp format,
+but I haven't made any changes so far (April 2020).
+#+begin_src emacs-lisp
+  (add-hook 'before-save-hook 'timp-stamp) ; run time stamp function whenever file is saved.
+  (setq time-stamp-pattern nil)		 ; no unusual format for timestamp implimented.
+#+end_src
+More information on the time stamp can be found here:
+https://www.gnu.org/software/emacs/manual/html_node/emacs/Time-Stamps.html
+and
+https://www.emacswiki.org/emacs/TimeStamp
+Modifications for time stamp include:
+- where in the file the time stamp can appear. By default this is the
+  first 8 lines, but if you designate this using a negative number the
+  time stamp can appear at the end of the file.
+
+- what time and date information and user information, in what order
+  is used. By default the order is YYYY-MM-DD HH:MM:SS username.
+
+In both these customisations, the Emacs wiki page cautions against
+making changes as it may cause issues if files are shared across
+machines.
+
 ** Configuration Using Package Functions.
 *** Package recentf - Re-open recently visited files.
 A frequent use-case for any text editor is to re-open a file
