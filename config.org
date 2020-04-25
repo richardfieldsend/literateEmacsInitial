@@ -542,6 +542,43 @@ install the package itself.
 		 "~/.emacs.d/elpa/magit-2.90.1/dir/"))
 
 #+end_src 
+*** Package Helm - Filtering Everywhere.
+Helm is one of those packages that a lot of people consider almost
+central to their use of Emacs. And when you go through the process of
+rebuilding your Emacs initialisation from scratch and you haven't got
+it for some period of time you realise how darn useful it is!
+
+The configuration installs Helm and then activates it. It then
+replaces the standard 'M-x' with 'helm-M-x' which provides the search
+functionality. This means you can filter everything by entering
+fragments of text, and see the list of options dynamically reflect the
+change. 
+
+For example, if you want to update the packages in Emacs you need to
+list the packages which uses the command
+'package-list-packages'.
+
+With Helm running typing 'pack list' will filter down to the option
+required. You can then move through the list using C-n/C-p.
+
+A similar buffer selection is bugun with C-x b. Type a substring of
+the buffer you want and the filtering kicks in.
+
+#+begin_src emacs-lisp
+  ;; Helm Setup.
+  (use-package helm
+    :diminish helm-mode
+    :init
+    :config (require 'helm-config)
+    :config (helm-mode 1)
+    :config (global-set-key (kbd "C-c h") 'helm-command-prefix)
+    :config (global-unset-key (kbd "C-x c"))
+    :config (global-set-key (kbd "M-x") #'helm-M-x)
+    :config (global-set-key (kbd "C-x r b") #'helm-filtered-bookmarks)
+    :config (global-set-key (kbd "C-x C-f") #'helm-find-files))
+#+end_src
+Note that the Helm configuration makes reference to using Diminish,
+this is already installed as part of my Magit installation. 
 ** Configuration - Notes On Emacs Usage Outside of Individual Packages.
 *** Emacs Server Usage.
 When Emacs is first started it can take some moments to fire up. This,
