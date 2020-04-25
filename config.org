@@ -23,12 +23,12 @@ All future code blocks will be of a similar form:
   (eval-and-compile)
   (require 'package)
   (setq package-archives '(("elpa" . "https://elpa.gnu.org/packages/")
-  ("melpa" . "https://melpa.org/packages/")
-  ("gnu" . "https://elpa.gnu.org/packages")))
+			   ("melpa" . "https://melpa.org/packages/")
+			   ("gnu" . "https://elpa.gnu.org/packages")))
   (package-initialize)
   (package-refresh-contents)
   (unless (package-installed-p 'use-package)
-  (package-install 'use-package))
+    (package-install 'use-package))
   (require 'use-package)
   (setq use-package-always-ensure t)
 #+end_src
@@ -72,8 +72,8 @@ attractive in the process.
 
 #+begin_src emacs-lisp
   (set-face-attribute 'default nil
-  :font "Inconsolata Medium"
-  :height 75)				; found by experimentation.
+		      :font "Inconsolata Medium"
+		      :height 75)				; found by experimentation.
 #+end_src
 
 +begin_src emacs-lisp
@@ -136,16 +136,16 @@ instead.
 #+begin_src emacs-lisp
   ;; ziggy-latitude - my home laptop:
   (if (string=(system-name) "ziggy-latitude")
-  (setq initial-scratch-message
-  "I use Emacs, which might be thought of as a thermonuclear word processor.\n\n\tNeal Stephenson - In the Beginning... Was the Command Line"))
+      (setq initial-scratch-message
+	    "I use Emacs, which might be thought of as a thermonuclear word processor.\n\n\tNeal Stephenson - In the Beginning... Was the Command Line"))
   ;; psychol-ford (Psychology)
   (if (string=(system-name) "psychol-ford")
-  (setq initial-scratch-message
-  "'Space,' it says,'is big. Really big. You just won't believe how vastly, hugely, mindbogglingly big it is.\nI mean, you may think it's a long way down the road to the chemist, but that's just peanuts to space.'\n\nHitch Hiker's Guide To The Galaxy\n\t Douglas Adams."))
+      (setq initial-scratch-message
+	    "'Space,' it says,'is big. Really big. You just won't believe how vastly, hugely, mindbogglingly big it is.\nI mean, you may think it's a long way down the road to the chemist, but that's just peanuts to space.'\n\nHitch Hiker's Guide To The Galaxy\n\t Douglas Adams."))
   ;; plantsci-cowin01
   (if (string=(system-name) "plantsci-cowin01")
-  (setq initial-scratch-message
-  "The most exciting phrase to hear in science, the one that heralds the most discoveries is\nnot 'Eureka!' (I have found it!) but 'That's funny...'\n\nIsaac Asimov"))
+      (setq initial-scratch-message
+	    "The most exciting phrase to hear in science, the one that heralds the most discoveries is\nnot 'Eureka!' (I have found it!) but 'That's funny...'\n\nIsaac Asimov"))
 #+end_src
 *** Built-in Customisations - Set Default Major Mode to Text.
 Some of the customisations made in this file don't get applied unless
@@ -192,9 +192,9 @@ approach of save often is quite reasonable.
   (setq history-delete-duplicates t)
   (setq savehist-save-minibuffer-history 1)
   (setq savehist-additional-variables
-  '(kill-ring
-  search-ring
-  regexp-search-ring))
+	'(kill-ring
+	  search-ring
+	  regexp-search-ring))
 #+end_src
 This configuration saves the history in a file in the same backup
 folder as above. This is a good location as the folder is hidden from
@@ -364,6 +364,26 @@ interfere with the initialisation files or my home folder.
 #+end_src
 Having restarted Emacs and checked that the places file now exists, I
 can confirm that this function now works as expected.
+*** Built-in Customisations - Native code indentation for Org-mode Source Blocks.
+This function is one of those that will have a major impact on the
+structure of the file, and is likely to result in more than one
+commit!
+
+So far, adding the source code blocks in the initialisation files has
+been a matter of adding the opening and closing tags, the language and
+then the source code. Indentation hasn't really worked properly, which
+isn't ideal in Lisp, but isn't problematic, like it would be in
+Python.
+
+The code below will turn on proper code indentation for source
+blocks. If this works properly then I will need to indent the source
+blocks.
+
+#+begin_src emacs-lisp
+  (setq org-src-tab-acts-natively t)
+#+end_src
+
+
 ** Configuration Using Package Functions.
 *** Package recentf - Re-open recently visited files.
 A frequent use-case for any text editor is to re-open a file
@@ -374,12 +394,12 @@ Keyboard shortcuts for recentf:
 C-x C-r - Open the list of recent files.
 #+begin_src emacs-lisp
   (use-package recentf
-  :config
-  (setq recentf-save-file "~/.Backups/recentf")
-  recentf-max-saved-items 500
-  recentf-max-menu-items 50
-  (recentf-mode +1)
-  (global-set-key (kbd "C-x C-r") 'recentf-open-files))
+    :config
+    (setq recentf-save-file "~/.Backups/recentf")
+    recentf-max-saved-items 500
+    recentf-max-menu-items 50
+    (recentf-mode +1)
+    (global-set-key (kbd "C-x C-r") 'recentf-open-files))
 #+end_src
 *** Package Colour Theme - Colour Scheme
 Install a colour theme using use-package.
@@ -389,9 +409,9 @@ muted font colour which is quite nice.
 
 #+begin_src emacs-lisp
   (use-package zenburn-theme
-  :ensure t
-  :config
-  (load-theme 'zenburn t))
+    :ensure t
+    :config
+    (load-theme 'zenburn t))
 #+end_src
 *** Package Rainbow Delimiters - Colour Paired Brackets
 Many programming languages rely on brackets to group things together,
@@ -403,19 +423,19 @@ each pair automatically but leaves the cursor in the middle of the
 pair so you can add the contents of the brackets.
 #+begin_src emacs-lisp
   (use-package rainbow-delimiters
-  :ensure t
-  :init
-  :config (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
-  :config (add-hook 'LaTeX-mode-hook 'rainbow-delimiters-mode)
-  :config (add-hook 'text-mode-hook 'rainbow-delimiters-mode)
-  :config (add-hook 'org-mode-hook 'rainbow-delimiters-mode))
+    :ensure t
+    :init
+    :config (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+    :config (add-hook 'LaTeX-mode-hook 'rainbow-delimiters-mode)
+    :config (add-hook 'text-mode-hook 'rainbow-delimiters-mode)
+    :config (add-hook 'org-mode-hook 'rainbow-delimiters-mode))
   (use-package electric
-  :ensure t
-  :init
-  :config (add-hook 'prog-mode-hook 'electric-pair-mode)
-  :config (add-hook 'LaTeX-mode-hook 'electric-pair-mode)
-  :config (add-hook 'text-mode-hook 'electric-pair-mode)
-  :config (add-hook 'org-mode-hook 'electric-pair-mode))
+    :ensure t
+    :init
+    :config (add-hook 'prog-mode-hook 'electric-pair-mode)
+    :config (add-hook 'LaTeX-mode-hook 'electric-pair-mode)
+    :config (add-hook 'text-mode-hook 'electric-pair-mode)
+    :config (add-hook 'org-mode-hook 'electric-pair-mode))
 #+end_src
 *** Package Doom Modeline - pretty modeline
 The standard mode line is okay, but this is Emacs, so why be satisfied
@@ -426,10 +446,10 @@ modeline are then installed as well.
 #+begin_src emacs-lisp
   (use-package all-the-icons)		; Install all the icons.
   (use-package doom-modeline		; Install doom-modeline
-  :hook (after-init . doom-modeline-mode)
-  :config (setq doom-modeline-icon t))	; Line required to trigger file type icon in  modeline.
+    :hook (after-init . doom-modeline-mode)
+    :config (setq doom-modeline-icon t))	; Line required to trigger file type icon in  modeline.
   (use-package doom-themes
-  :config (load-theme 'doom-molokai t))
+    :config (load-theme 'doom-molokai t))
 #+end_src
 *** Package Minimap Mode - Overview of file in tiny text
 This function opens a narrow side window which shows a mini version of
@@ -438,8 +458,8 @@ switches on the function for TeX, LaTeX and Programming.
 
 #+begin_src emacs-lisp
   (use-package minimap			; Minimap mode
-  :config (setq minimap-major-modes '(tex-mode LaTeX-mode prog-mode))
-  :config (minimap-mode 1))
+    :config (setq minimap-major-modes '(tex-mode LaTeX-mode prog-mode))
+    :config (minimap-mode 1))
 #+end_src
 This function could probably be fiddled with as the tiny text is
 really, really tiny.
@@ -448,7 +468,7 @@ The heading levels in Org-mode are created by multiple asterisks. It
 gets long, so replace the long strings of stars with pretty bullets.
 #+begin_src emacs-lisp
   (use-package org-bullets
-  :config (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))		;
+    :config (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))		;
 #+end_src
 *** Package Fireplace - The warm glow of using the one true editor
 One of those completely silly and unnecessary packages. All it does is
@@ -471,19 +491,20 @@ bracket will be in a different colour, and the relevant closing
 bracket will be in the appropriate, matching colour.
 #+begin_src emacs-lisp
   (use-package rainbow-delimiters		; Install the package
-  :ensure t
-  :init
-  :config (add-hook #'prog-mode-hook 'rainbow-delimiters-mode)
-  :config (add-hook #'LaTeX-mode-hook 'rainbow-delimiters-mode)
-  :config (add-hook #'text-mode-hook 'rainbow-delimiters-mode)
-  :config (add-hook #'org-mode-hook 'rainbow-delimiters-mode)
-  ;; The colouring of pairs of brackets is useful, but the rest of this
-  ;; function aids adding balanced brackets by inserting brackets in
-  ;; pairs automatically.
-  :config (add-hook 'prog-mode-hook 'electric-pair-mode)
-  :config (add-hook 'LaTeX-mode-hook 'electric-pair-mode)
-  :config (add-hook 'text-mode-hook 'electric-pair-mode)
-  :config (add-hook 'org-mode-hook 'electric-pair-mode))
+    :ensure t
+    :init
+    :config (add-hook #'prog-mode-hook 'rainbow-delimiters-mode)
+    :config (add-hook #'LaTeX-mode-hook 'rainbow-delimiters-mode)
+    :config (add-hook #'text-mode-hook 'rainbow-delimiters-mode)
+    :config (add-hook #'org-mode-hook 'rainbow-delimiters-mode)
+    ;; The colouring of pairs of brackets is useful, but the rest of this
+    ;; function aids adding balanced brackets by inserting brackets in
+    ;; pairs automatically.
+    :config (add-hook 'prog-mode-hook 'electric-pair-mode)
+    :config (add-hook 'LaTeX-mode-hook 'electric-pair-mode)
+    :config (add-hook 'text-mode-hook 'electric-pair-mode)
+    :config (add-hook 'org-mode-hook 'electric-pair-mode))
+#+end_src
 *** Package Magit - Version Control within Emacs
 **** Package Dash - Required by Magit.
 #+begin_src emacs-lisp
@@ -510,13 +531,13 @@ install the package itself.
 **** Package Magit - The package itself.
 #+begin_src emacs-lisp
   (use-package magit
-  :config (global-set-key (kbd "C-x g") 'magit-status))
+    :config (global-set-key (kbd "C-x g") 'magit-status))
 #+end_src
 **** Package Magit Documentation - Good to know.
 #+begin_src emacs-lisp
   (with-eval-after-load 'info
-  (info-initialize)
-  (add-to-list 'Info-directory-list
-  "~/.emacs.d/elpa/magit-2.90.1/dir/"))
+    (info-initialize)
+    (add-to-list 'Info-directory-list
+		 "~/.emacs.d/elpa/magit-2.90.1/dir/"))
 
 #+end_src 
