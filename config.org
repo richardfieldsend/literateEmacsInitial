@@ -344,6 +344,26 @@ you can set the mis-type to correct itself.
 The abbreviation file can be added to version control and shared
 across multiple devices.
 
+*** Built-in Customisations - SavePlace - Save your location for next time.
+One of those behaviours that you don't really know that you miss until
+it isn't there. As of now, when I open the configuration file it opens
+as a fully collapsed Org file with just the main header
+displayed. Navigation to the place where I was last is only the work
+of a few moments, but when you are editing and restarting repeatedly
+it does get tedious. This configuration turns on a function that
+records where is the file you are in a suitable file. 
+
+More information is available here:
+https://www.emacswiki.org/emacs/SavePlace
+
+I am placing the places file in the .Backups folder so that it doesn't
+interfere with the initialisation files or my home folder.
+#+begin_src emacs-lisp
+  (save-place-mode 1)			;turn on place saving
+  (setq save-place-file "~/.Backups/.places") ; location of the places file.
+#+end_src
+Having restarted Emacs and checked that the places file now exists, I
+can confirm that this function now works as expected.
 ** Configuration Using Package Functions.
 *** Package recentf - Re-open recently visited files.
 A frequent use-case for any text editor is to re-open a file
@@ -499,4 +519,4 @@ install the package itself.
   (add-to-list 'Info-directory-list
   "~/.emacs.d/elpa/magit-2.90.1/dir/"))
 
-#+end_src
+#+end_src 
