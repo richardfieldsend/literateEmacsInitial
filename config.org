@@ -210,6 +210,11 @@ This function removes any extra lines at the end of the document. I
 did take a look at having a way of removing any double spacing in the
 document, given that this is somehow considered not the right thing
 any more, but I haven't been able to do this yet.
+*** Built-in Customisations - yes/no with y/n.
+Save time and keystrokes using y/n rather than yes/no.
+#+begin_src emacs-lisp
+  (fset 'yes-or-no-p 'y-or-n.p)
+#+end_src
 ** Configuration Using Package Functions.
 *** Package recentf - Re-open recently visited files.
 A frequent use-case for any text editor is to re-open a file
@@ -249,10 +254,15 @@ each pair automatically but leaves the cursor in the middle of the
 pair so you can add the contents of the brackets.
 #+begin_src emacs-lisp
   (use-package rainbow-delimiters
+  :ensure t
+  :init
   :config (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
   :config (add-hook 'LaTeX-mode-hook 'rainbow-delimiters-mode)
   :config (add-hook 'text-mode-hook 'rainbow-delimiters-mode)
-  :config (add-hook 'org-mode-hook 'rainbow-delimiters-mode)
+  :config (add-hook 'org-mode-hook 'rainbow-delimiters-mode))
+  (use-package electric
+  :ensure t
+  :init
   :config (add-hook 'prog-mode-hook 'electric-pair-mode)
   :config (add-hook 'LaTeX-mode-hook 'electric-pair-mode)
   :config (add-hook 'text-mode-hook 'electric-pair-mode)
