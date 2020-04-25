@@ -267,6 +267,83 @@ In both these customisations, the Emacs wiki page cautions against
 making changes as it may cause issues if files are shared across
 machines.
 
+*** Built-in Customisations - Abbreviation Expansions.
+Emacs has two main methods of providing abbreviation expansion which
+can be used as a way of reducing the amount of typing you have to
+do.
+**** Dynamic Expansion.
+Out of the box, Emacs offers dynamic abbreviation expansion. The
+approach is simple and straightforward. If a partial string has been
+typed which is the start of a longer previous string then typing M-/
+will search back through the file to find the suitable expansion and
+expand the text appropriately. To demonstrate this, consider writing
+about my research equipment from my days in Leicester. Typing the
+words:
+
+Weissenberg Rheogoniometer
+
+repeatedly in a file is a real test of my typing skills. If, I now
+type:
+
+wei
+
+and hit M-/ I get an optional expansion, of the word to weissenberg
+(if I use a capital it will be preserved). Then typing a space and M-/
+again will add the second word.
+
+However, I have recently been seeing lots of references to Hippie
+Expand (https://www.emacswiki.org/emacs/HippieExpand) which purports
+to do this type of expansion and more.
+
+The following code enables Hippie Expand.
+#+begin_src emacs-lisp
+  (global-set-key "\M-/" 'hippie-expand)	; bind hippie expand
+#+end_src
+This function may require more tweaks to use its full power, but it
+works as expected for now.
+**** abbrev Functionality.
+The other abbreviation expansion system which I use is to
+automatically expand preconfigured abbreviations to full pieces of
+text. One example of this is the acronyms I have configured to expand
+when I am writing emails where Emacs is my editor of choice with
+Evolution opens when I am editing an email.
+
+Expansions include:
+
+tia - Thanks in anticipation
+
+bw - best wishes
+
+hth - hope that helps
+
+The file which holds the expansions is stored in the .emacs.d folder
+so that it can be placed under version control.
+#+begin_src emacs-lisp
+  (setq-default abbrev-mode t)		; Activate abbreviation mode
+  (setq abbrev-file-name "~/.emacs.d/abbrev_defs") ; file containing expansions
+#+end_src
+The process of expanding the abbreviations is automatic, which is, in
+most respects the big advantage of this function, though it does
+require you to be careful in selecting the short form that is to be
+expanded. If you use a short form which is an existing word then the
+insertion will need to be undone. The undone sequence doesn't have a
+keyboard shortcut, so ideally this should be avoided.
+
+Adding expansions:
+
+With the cursor at the end of the string to be expanded type:
+
+C-x a i g - Add abbreviation for global use (all modes)
+
+C-x a i l - Add abbreviation for use in the current major mode.
+
+One use for this which is very useful is automatic typo fixing. Like
+most people there are words which I repeatedly mistype. In this case
+you can set the mis-type to correct itself.
+
+The abbreviation file can be added to version control and shared
+across multiple devices.
+
 ** Configuration Using Package Functions.
 *** Package recentf - Re-open recently visited files.
 A frequent use-case for any text editor is to re-open a file
