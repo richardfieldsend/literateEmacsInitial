@@ -382,8 +382,9 @@ blocks.
 #+begin_src emacs-lisp
   (setq org-src-tab-acts-natively t)
 #+end_src
-
-
+The function was found in a question and answer on Stack Overflow
+here:
+https://stackoverflow.com/questions/15773354/indent-code-in-org-babel-src-blocks
 ** Configuration Using Package Functions.
 *** Package recentf - Re-open recently visited files.
 A frequent use-case for any text editor is to re-open a file
@@ -541,3 +542,23 @@ install the package itself.
 		 "~/.emacs.d/elpa/magit-2.90.1/dir/"))
 
 #+end_src 
+** Configuration - Notes On Emacs Usage Outside of Individual Packages.
+*** Emacs Server Usage.
+When Emacs is first started it can take some moments to fire up. This,
+especially when compared with Vim can seem problematic for the odd
+quick edit. The solution is to run Emacs as a server and then open a
+window connected to the existing instance. There were originally notes
+on doing this by running Emacs as a daemon, but now I have moved to
+starting Emacs using this command:
+
+- emacsclient -a "" -c
+
+If the server isn't already running then this command starts the
+server and then runs the client to connect to the server. 
+
+The difference in time taken to start can be serious. Starting Emacs
+from nothing takes about 30s. Running emacsclient to connect to a
+running server takes less than 5s.
+** Configuration - Abandoned Packages.
+- Word of the Day - Not  worth the clock cycles, though may be worth
+  another look at some point.
