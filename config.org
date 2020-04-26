@@ -697,6 +697,17 @@ file types.
 		:config (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
 #+end_src
 
+** Configuration For Programming Functions.
+*** Programming in C/C++
+My old customisation has only one entry for C/C++, but it is commented
+out. I am enabling it now, to see if it works.
+#+begin_src emacs-lisp
+  (use-package ecb
+    :config (require 'ecb))
+#+end_src
+I should look into this as there are lots of pages on the web on how
+to get Emacs to be a good C/C++ editor...
+
 ** Configuration - Notes On Emacs Usage Outside of Individual Packages.
 *** Emacs Server Usage.
 When Emacs is first started it can take some moments to fire up. This,
