@@ -213,7 +213,7 @@ any more, but I haven't been able to do this yet.
 *** Built-in Customisations - yes/no with y/n.
 Save time and keystrokes using y/n rather than yes/no.
 #+begin_src emacs-lisp
-  (fset 'yes-or-no-p 'y-or-n.p)
+  (fset 'yes-or-no-p 'y-or-n-p)
 #+end_src
 *** Built-in Customisations - Word wrapping for all the modes.
 TODO - add the text
@@ -688,6 +688,14 @@ To check what achievements are available, and which have been achieved
 run:
 
 achievements-list-achievements
+
+*** Package All The Icons for Dired - Nice icons for Dired page.
+When loading Dired this function provides nice eye candy icons for the
+file types.
+#+begin_src emacs-lisp
+  (use-package all-the-icons-dired
+		:config (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
+#+end_src
 
 ** Configuration - Notes On Emacs Usage Outside of Individual Packages.
 *** Emacs Server Usage.
