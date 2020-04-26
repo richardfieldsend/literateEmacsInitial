@@ -776,6 +776,16 @@ As well as Clojure, I have been reading about Lisp using Common Lisp
       :mode (("\\.lisp'" . slime-mode))
       :config (setq inferior-lisp-program "/usr/bin/clisp"))
 #+end_src
+** Configuration for Personal Information Management.
+*** Big Brother Database.
+A simple text address book and data management system for Emacs. It
+gets used most often to look up addresses at Christmas, but it can be
+used for things like mailmerge if you are so minded.
+#+begin_src emacs-lisp
+    (use-package bbdb
+      :config (bbdb-initialize)
+      :init (setq bbdb-file "~/Dropbox/bbdb"))
+#+end_src
 ** Configuration - Notes On Emacs Usage Outside of Individual Packages.
 *** Emacs Server Usage.
 When Emacs is first started it can take some moments to fire up. This,
