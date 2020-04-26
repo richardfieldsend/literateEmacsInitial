@@ -736,6 +736,38 @@ with.
   (use-package ein)
 #+end_src
 
+*** Programming in Clojure.
+Activate Clojure mode ready to code in this Lisp dialect. This is so I
+can follow the guidance in the book 'Clojure for The Brave and the
+True' eBook. 
+# Installing Clojure Mode and Cider.
+#+begin_src emacs-lisp
+  (use-package clojure-mode
+    :mode (("\\.clj\\'" . clojure-mode)
+	   ("\\.edn\\'" . clojure-mode))
+    :init (add-hook 'clojure-mode-hook #'paredit-mode))
+  (use-package clojure-mode-extra-font-locking)
+  (use-package cider
+    :defer t
+    :init (add-hook 'cider-mode-hook #'clj-refactor-mode)
+    :diminish subword-mode
+    :config 
+    (setq nrepl-log-messages t
+	  cider-repl-display-in-current-window t
+	  cider-repl-use-clojure-font-lock t
+	  cider-prompt-save-file-on-load 'always-save
+	  cider-font-lock-dynamically '(macro core function var)
+	  nrepl-hide-special-buffers t
+	  cider-overlays-use-font-lock t)
+    (cider-repl-toggle-pretty-printing))
+  (use-package projectile)
+  (use-package tagedit)
+  (use-package paredit)
+#+end_src
+This code block installs Clojure mode, font-locking (syntax colouring
+for Clojure), Cider, Projectile and tagedit. These look like the main
+ones of concern in the Clojure book, but others may be added later.
+
 ** Configuration - Notes On Emacs Usage Outside of Individual Packages.
 *** Emacs Server Usage.
 When Emacs is first started it can take some moments to fire up. This,
