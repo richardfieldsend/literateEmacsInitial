@@ -4,3 +4,4 @@
 .gitignore
 /transient/
 /.achievements
+/elpy/
