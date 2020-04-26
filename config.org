@@ -768,6 +768,14 @@ This code block installs Clojure mode, font-locking (syntax colouring
 for Clojure), Cider, Projectile and tagedit. These look like the main
 ones of concern in the Clojure book, but others may be added later.
 
+*** Programming in Lisp using Slime.
+As well as Clojure, I have been reading about Lisp using Common Lisp
+(clisp). The following configures Slime when using Lisp.
+#+begin_src emacs-lisp
+    (use-package slime
+      :mode (("\\.lisp'" . slime-mode))
+      :config (setq inferior-lisp-program "/usr/bin/clisp"))
+#+end_src
 ** Configuration - Notes On Emacs Usage Outside of Individual Packages.
 *** Emacs Server Usage.
 When Emacs is first started it can take some moments to fire up. This,
