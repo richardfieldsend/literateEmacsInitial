@@ -805,6 +805,23 @@ functionality.
     :config (add-hook 'css-mode-hook 'emmet-mode))
   ;; Enable emmet mode for both HTML and CSS files.
 #+end_src
+*** Package for word counting - wc-mode
+I have looked at word counting in Emacs a few times. It has been
+fairly easy to provide word counts manually, but I wanted something
+that would provide the information at a glance. 
+
+The code below installs the word count mode and also sets a modeline
+format to display this information. However, as I am now using Doom
+Modeline the format isn't implemented. I have enabled the behaviour
+using customize-group, but will transfer this to the config.org file
+instead.
+#+begin_src emacs-lisp
+  (use-package wc-mode
+    :ensure t
+    :config (require 'wc-mode)
+    :config (global-set-key "\C-cw" 'wc-mode)
+  )
+#+end_src
 ** Configuration for Personal Information Management.
 *** Big Brother Database.
 A simple text address book and data management system for Emacs. It
