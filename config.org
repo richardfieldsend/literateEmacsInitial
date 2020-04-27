@@ -73,7 +73,7 @@ attractive in the process.
 #+begin_src emacs-lisp
   (set-face-attribute 'default nil
 		      :font "Inconsolata Medium"
-		      :height 75)				; found by experimentation.
+		      :height 85)				; found by experimentation.
 #+end_src
 
 +begin_src emacs-lisp
@@ -791,6 +791,20 @@ environment within Emacs. Nice, but simplistic.
 Things that would be useful: 
 - an updating word count for both normal text and LaTeX.
 
+*** Package for HTML Editing - Web Page Creation.
+Emmet mode is the current best option for creating web pages. It
+essentially runs on the basis that you enter simple tags and then run
+the expansion key combination and this converts the tag into an almost
+fully formed bit of HTML. It  balances out opening and closing tags
+etc, leading to fewer entries in your code. It also helps when writing
+CSS files, though I haven't  experimented much with that
+functionality.
+#+begin_src emacs-lisp
+  (use-package emmet-mode
+    :config (add-hook 'html-mode-hook 'emmet-mode)
+    :config (add-hook 'css-mode-hook 'emmet-mode))
+  ;; Enable emmet mode for both HTML and CSS files.
+#+end_src
 ** Configuration for Personal Information Management.
 *** Big Brother Database.
 A simple text address book and data management system for Emacs. It
