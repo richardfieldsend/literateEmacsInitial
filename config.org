@@ -844,6 +844,25 @@ selection and lots of other useful things.
     :config (add-hook 'LaTeX-mode-hook 'outline-minor-mode)
     :config (add-hook 'latex-mode-hook 'outline-minor-mode))
 #+end_src
+*** Package for BibTeX Management - Using eBib
+LaTeX manages bibliographic data using BibTeX. A package that helps
+manage this is eBib. The configuration saves the bibliographies in a
+single folder, with each bibliographic file being targetted at a
+particular book type.
+#+begin_src emacs-lisp
+  (use-package ebib
+    :config (global-set-key "\C-cb" 'ebib)
+    :config (setq ebib-bib-search-dirs '("~/bibliographies/"))
+    :config (setq ebib-file-search-dirs '("~/bibliographies/"))
+    :config (setq ebib-default-entry-type 'Book)
+    :config (setq ebib-preload-bib-files
+		  '("humble.bib" "amazon.bib" "paperbacks.bib" "hardbacks.bib" "audiobooks.bib"))
+    :config (setq ebib-keywords-field-keep-sorted t)
+    :config (setq ebib-keywords-file "~/bibliographies/keywordslist.txt")
+    :config (setq ebib-keywords-use-only-file t)
+    :config (setq ebib-reading-list-file "~/bibliographies/ToReadList.org")
+    :config (setq ebib-use-timestamp t))
+#+end_src
 ** Configuration for Personal Information Management.
 *** Big Brother Database.
 A simple text address book and data management system for Emacs. It
