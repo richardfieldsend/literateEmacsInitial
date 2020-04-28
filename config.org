@@ -837,7 +837,7 @@ selection and lots of other useful things.
     :config (setq reftex-plug-into-AUCTeX t)
     :config (setq-default TeX-master nil)
     :config (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
-    :config (add-hook 'latex-mode-hook 'LaTeK-math-mode)
+    :config (add-hook 'latex-mode-hook 'LaTeX-math-mode)
     :config (setq TeX-fold-mode 1)
     :config (setq TeX-parse-self t)
     :config (setq TeX-electric-escape t)
@@ -922,6 +922,38 @@ text as you write it. I'm not sure I always like the result, but the
 indication of overt wordiness and use of weasel words is worth keeping
 in check. 
 
+*** Package for Lorem Ipsum - Adding test text.
+When testing a document layout function in any system (Org, LaTeX,
+Markdown etc) then it is handy to be able to put in chunks of text
+which look like proper text, but which isn't the sort of text you want
+to read. Lorem Ipsum looks like Latin or similar, so you can see the
+'shape' of the layout.
+#+begin_src emacs-lisp
+  (use-package lorem-ipsum)
+#+end_src
+*** Package for Typing of Emacs - A Typing Tutor in Emacs.
+#+begin_src emacs-lisp
+  (use-package typing
+    :init
+    (autoload 'typing-of-emacs "typing nil t")
+    :config
+    (progn
+      (setq toe-starting-length 3)
+      (setq toe-starting-time-per-word 10)
+      (setq toe-max-length 20)))
+#+end_src
+*** Package for Focus Function - dim text away from the cursor.
+#+begin_src emacs-lisp
+  (use-package focus
+    :enable t
+    :config (add-hook 'LaTeX-mode-hook 'focus-mode)
+    :config (add-hook 'latex-mode-hook 'focus-mode)
+    :config (add-hook 'org-mode 'focus-mode)
+    :config (add-to-list 'focus-mode-to-thing '(text-mode . paragraph))
+    :config (add-to-list 'focus-mode-to-thing '(LaTeX-mode . paragraph))
+    :config (add-to-list 'focus-mode-to-thing '(latex-mode . paragraph))
+    :config (add-to-list 'focus-mode-to-thing '(org-mode . paragraph)))
+#+end_src
 ** Configuration for Personal Information Management.
 *** Big Brother Database.
 A simple text address book and data management system for Emacs. It
