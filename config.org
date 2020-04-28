@@ -863,6 +863,22 @@ particular book type.
     :config (setq ebib-reading-list-file "~/bibliographies/ToReadList.org")
     :config (setq ebib-use-timestamp t))
 #+end_src
+*** Package for Flyspell - On the fly spellchecking
+No text editor is really worth the name if you don't get a realtime
+spell checking process built-in. 
+
+Of course, if you are going to do this you want to make sure you are
+using the right version of English!
+#+begin_src emacs-lisp
+  (require 'ispell)
+  (setq ispell-dictionary "british")
+  (add-hook 'text-mode-hook 'flyspell-mode)
+  (add-hook 'prog-mode-hook 'flyspell-mode)
+  (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+  (add-hook 'latex-mode-hook 'flyspell-mode)
+  (add-hook 'org-mode-hook 'flyspell-mode)
+  (add-hook 'fundamental-mode-hook 'flyspell-mode)
+#+end_src
 ** Configuration for Personal Information Management.
 *** Big Brother Database.
 A simple text address book and data management system for Emacs. It
