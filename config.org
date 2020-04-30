@@ -960,6 +960,29 @@ to read. Lorem Ipsum looks like Latin or similar, so you can see the
       :ensure t
       :config (defcustom journal-dir "~/Dropbox/diary/"))
 #+end_src
+*** Package for Fountain Mode - Screenwriting Support.
+Information on the package here:
+https://github.com/rnkn/fountain-mode
+Information about Fountain markup here:
+https://fountain.io/
+#+begin_src emacs-lisp
+  (use-package fountain-mode
+    :ensure t)
+#+end_src
+TODO: Investigate using Fountain to write screenplay type output. 
+
+*** Package for Olivetti Mode - Simple text entry layout and display.
+More information on Olivetti mode here:
+https://github.com/rnkn/olivetti
+I think this is meant to be similar to Writeroom mode, but less
+hardcore anti-distraction.
+#+begin_src emacs-lisp
+  (use-package olivetti)
+#+end_src
+TODO: Compare and contrast this functionality with Writeroom. I
+suspect that I don't need both, so I might as well choose one or the
+other.
+
 ** Configuration for Personal Information Management.
 *** Big Brother Database.
 A simple text address book and data management system for Emacs. It
