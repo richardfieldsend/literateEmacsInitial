@@ -10,6 +10,7 @@
  ;; If there is more than one, they won't work right.
  '(doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode text-mode))
  '(doom-modeline-enable-word-count t)
+ '(org-journal-dir "~/Dropbox/diary/")
  '(package-selected-packages '(use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

@@ -945,7 +945,7 @@ to read. Lorem Ipsum looks like Latin or similar, so you can see the
 *** Package for Focus Function - dim text away from the cursor.
 #+begin_src emacs-lisp
   (use-package focus
-    :enable t
+    :ensure t
     :config (add-hook 'LaTeX-mode-hook 'focus-mode)
     :config (add-hook 'latex-mode-hook 'focus-mode)
     :config (add-hook 'org-mode 'focus-mode)
@@ -953,6 +953,12 @@ to read. Lorem Ipsum looks like Latin or similar, so you can see the
     :config (add-to-list 'focus-mode-to-thing '(LaTeX-mode . paragraph))
     :config (add-to-list 'focus-mode-to-thing '(latex-mode . paragraph))
     :config (add-to-list 'focus-mode-to-thing '(org-mode . paragraph)))
+#+end_src
+*** Package for Org Mode Journal - Writing a diary
+#+begin_src emacs-lisp
+    (use-package org-journal
+      :ensure t
+      :config (defcustom journal-dir "~/Dropbox/diary/"))
 #+end_src
 ** Configuration for Personal Information Management.
 *** Big Brother Database.
