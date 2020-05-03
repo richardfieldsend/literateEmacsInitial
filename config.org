@@ -697,6 +697,21 @@ file types.
 		:config (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
 #+end_src
 
+*** Package YaSnippet - Snippets to save you typing.
+Snippets are a way of adding text using templates which can then move
+the cursor into the correct location to add further text. I have added
+the package because it is popular and I think it might be useful, but
+in the modes that I'm interested in it isn't particularly useful. In
+LaTeX mode, for instance, the templating and tag insertion within the
+AuCTeX package is more useful than the Yasnippets approach.
+#+begin_src emacs-lisp
+  (use-package yasnippet
+    :ensure t
+      :init
+      (yas-global-mod 1))
+  (use-package yasnippet-snippets
+    :ensure t)
+#+end_src
 ** Configuration For Programming Functions.
 *** Programming in C/C++
 My old customisation has only one entry for C/C++, but it is commented
