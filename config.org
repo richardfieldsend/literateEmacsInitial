@@ -708,7 +708,7 @@ AuCTeX package is more useful than the Yasnippets approach.
   (use-package yasnippet
     :ensure t
       :init
-      (yas-global-mod 1))
+      (yas-global-mode 1))
   (use-package yasnippet-snippets
     :ensure t)
 #+end_src
@@ -717,9 +717,22 @@ AuCTeX package is more useful than the Yasnippets approach.
 My old customisation has only one entry for C/C++, but it is commented
 out. I am enabling it now, to see if it works.
 #+begin_src emacs-lisp
+		    (use-package cc-mode
+		      :config (add-hook 'c-mode-hook
+					'(lambda ()
+					   (c-set-style "linux")
+					   (c-toggle-auto-state)
+					   (c-toggle-hungry-state)))
+		      :config (add-hook 'c++-mode-hook
+					'(lambda ()
+					   (c-set-style "Stroustrup")
+					   (c-toggle-auto-state))))
+#+end_src
+
++begin_src emacs-lisp
   (use-package ecb
     :config (require 'ecb))
-#+end_src
++end_src
 I should look into this as there are lots of pages on the web on how
 to get Emacs to be a good C/C++ editor...
 
@@ -970,11 +983,11 @@ to read. Lorem Ipsum looks like Latin or similar, so you can see the
     :config (add-to-list 'focus-mode-to-thing '(org-mode . paragraph)))
 #+end_src
 *** Package for Org Mode Journal - Writing a diary
-#+begin_src emacs-lisp
++begin_src emacs-lisp
     (use-package org-journal
       :ensure t
-      :config (defcustom journal-dir "~/Dropbox/diary/"))
-#+end_src
+      :config (defcustom journal-dir ,"~/Dropbox/diary/"))
++end_src
 *** Package for Fountain Mode - Screenwriting Support.
 Information on the package here:
 https://github.com/rnkn/fountain-mode
