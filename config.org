@@ -602,13 +602,22 @@ the buffer you want and the filtering kicks in.
   (use-package helm
     :diminish helm-mode
     :init
+    :config (require 'helm)
     :config (require 'helm-config)
     :config (helm-mode 1)
     :config (global-set-key (kbd "C-c h") 'helm-command-prefix)
     :config (global-unset-key (kbd "C-x c"))
+    :config (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
+    ;; The above line makes Tab work as with 'normal' Emacs.
+    :config (define-key helm-map (kbd "C-z") 'helm-select-action) ; list actions using C-z
     :config (global-set-key (kbd "M-x") #'helm-M-x)
     :config (global-set-key (kbd "C-x r b") #'helm-filtered-bookmarks)
-    :config (global-set-key (kbd "C-x C-f") #'helm-find-files))
+    :config (global-set-key (kbd "C-x C-f") #'helm-find-files)
+    ;; Change the helm buffer to a small block at the base of the Emacs window.
+    ;; Following this page: http://tuhdo.github.io/helm-intro.html
+    :config (setq helm-autoresize-max-height 0)
+    :config (setq helm-autoresize-min-height 20)
+    :config (helm-autoresize-mode 1))
 #+end_src
 Note that the Helm configuration makes reference to using Diminish,
 this is already installed as part of my Magit installation. 
