@@ -762,7 +762,7 @@ with.
 #+begin_src emacs-lisp
   (use-package elpy
     :config (elpy-enable)
-    :config (setq python-shell-interpreter "python" python-shell-interproter-args "-i"))
+    :config (setq python-shell-interpreter "python3" python-shell-interpreter-args "-i"))
   (use-package flycheck
     :config (progn global-flycheck-mode)
     :config (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
