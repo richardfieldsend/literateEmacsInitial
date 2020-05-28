@@ -728,19 +728,22 @@ out. I am enabling it now, to see if it works.
 #+begin_src emacs-lisp
   (use-package cc-mode
     :config (add-hook 'c-mode-hook
-		      '(lambda ()
-			 (c-set-style "linux")
-			 (c-toggle-auto-state)
-			 (c-toggle-hungry-state)))
-    :config (add-hook 'c++-mode-hook
-		      '(lambda ()
-			 (c-set-style "Stroustrup")
-			 (c-toggle-auto-state))))
+			'(lambda ()
+			   (c-set-style "linux")
+			   (c-toggle-auto-state)
+			   (c-toggle-hungry-state)))
+      :config (add-hook 'c++-mode-hook
+			'(lambda ()
+			   (c-set-style "Stroustrup")
+			   (c-toggle-auto-state))))
   (use-package company
-  :config (progn
-	    (add-hook 'after-init-hook 'global-company-mode)
-	    (global-set-key (kbd "M-/") 'company-complete-common-or-cycle)
-	    (setq company-idle-delay 0)))
+    :config (progn
+	      (add-hook 'after-init-hook 'global-company-mode)
+	      (global-set-key (kbd "M-/") 'company-complete-common-or-cycle)
+	      (setq company-idle-delay 0)))
+  (use-package flycheck
+    :config (progn
+	      (global-flycheck-mode)))
 #+end_src
 
 +begin_src emacs-lisp
