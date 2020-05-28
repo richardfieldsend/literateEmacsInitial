@@ -726,16 +726,21 @@ AuCTeX package is more useful than the Yasnippets approach.
 My old customisation has only one entry for C/C++, but it is commented
 out. I am enabling it now, to see if it works.
 #+begin_src emacs-lisp
-		    (use-package cc-mode
-		      :config (add-hook 'c-mode-hook
-					'(lambda ()
-					   (c-set-style "linux")
-					   (c-toggle-auto-state)
-					   (c-toggle-hungry-state)))
-		      :config (add-hook 'c++-mode-hook
-					'(lambda ()
-					   (c-set-style "Stroustrup")
-					   (c-toggle-auto-state))))
+  (use-package cc-mode
+    :config (add-hook 'c-mode-hook
+		      '(lambda ()
+			 (c-set-style "linux")
+			 (c-toggle-auto-state)
+			 (c-toggle-hungry-state)))
+    :config (add-hook 'c++-mode-hook
+		      '(lambda ()
+			 (c-set-style "Stroustrup")
+			 (c-toggle-auto-state))))
+  (use-package company
+  :config (progn
+	    (add-hook 'after-init-hook 'global-company-mode)
+	    (global-set-key (kbd "M-/") 'company-complete-common-or-cycle)
+	    (setq company-idle-delay 0)))
 #+end_src
 
 +begin_src emacs-lisp
