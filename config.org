@@ -442,10 +442,10 @@ in a while, but the current one (Zenburn) is a fairly dark one with
 muted font colour which is quite nice.
 
 #+begin_src emacs-lisp
-  (use-package zenburn-theme
+  (use-package autumn-light-theme
     :ensure t
-    :config
-    (load-theme 'zenburn t))
+    :init (load-theme autumn-light-3
+theme t))
 #+end_src
 *** Package Rainbow Delimiters - Colour Paired Brackets
 Many programming languages rely on brackets to group things together,
@@ -726,24 +726,28 @@ AuCTeX package is more useful than the Yasnippets approach.
 My old customisation has only one entry for C/C++, but it is commented
 out. I am enabling it now, to see if it works.
 #+begin_src emacs-lisp
-  (use-package cc-mode
-    :config (add-hook 'c-mode-hook
-			'(lambda ()
-			   (c-set-style "linux")
-			   (c-toggle-auto-state)
-			   (c-toggle-hungry-state)))
-      :config (add-hook 'c++-mode-hook
-			'(lambda ()
-			   (c-set-style "Stroustrup")
-			   (c-toggle-auto-state))))
-  (use-package company
-    :config (progn
-	      (add-hook 'after-init-hook 'global-company-mode)
-	      (global-set-key (kbd "M-/") 'company-complete-common-or-cycle)
-	      (setq company-idle-delay 0)))
-  (use-package flycheck
-    :config (progn
-	      (global-flycheck-mode)))
+	(use-package cc-mode
+	  :config (add-hook 'c-mode-hook
+			    '(lambda ()
+			       (c-set-style "linux")
+			       (c-toggle-auto-state)
+			       (c-toggle-hungry-state)))
+	  :config (add-hook 'c++-mode-hook
+			    '(lambda ()
+			       (c-set-style "Stroustrup")
+			       (c-toggle-auto-state))))
+	(use-package company
+	  :config (progn
+		    (add-hook 'after-init-hook 'global-company-mode)
+		    (global-set-key (kbd "M-/") 'company-complete-common-or-cycle)
+		    (setq company-idle-delay 0)))
+	(use-package flycheck
+	  :config (progn
+		    (global-flycheck-mode)))
+      (use-package irony
+	:config (add-hook 'c++-mode-hook 'irony-mode)
+	:config (add-hook 'c-mode-hook 'irony-mode)
+	:config (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
 #+end_src
 
 +begin_src emacs-lisp
