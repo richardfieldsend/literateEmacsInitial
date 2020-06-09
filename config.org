@@ -166,10 +166,12 @@ stop the number getting too ridiculous though.
 #+begin_src emacs-lisp
   (setq backup-directory-alist '(("." . "~/.Backups/"))) ; Hidden backup folder.
   (setq delete-old-versions t)			       ; delete old versions silently
-  (setq kept-new-versions 6)			       ; no. of newer files to keep
+  (setq kept-new-versions 6)			       ; no. of new files to keep
   (setq kept-old-versions 2)			       ; no. of older files to keep
   (setq version-control t)			       ; create numbered backups
   (setq vc-make-backup-files t)			       ; backup even files which are under version control
+  (setq auto-save-interval 60)
+  (setq auto-save-timeout 60)
   (setq auto-save-file-name-transforms '((".*" "~/.Backups/" t))) ; uniquify saved file names
 #+end_src
 *** TODO - check information on the way backup works.
@@ -490,11 +492,11 @@ This function opens a narrow side window which shows a mini version of
 the text. It can be useful to see the 'shape' of the file. This
 switches on the function for TeX, LaTeX and Programming.
 
-#+begin_src emacs-lisp
++begin_src emacs-lisp
   (use-package minimap			; Minimap mode
     :config (setq minimap-major-modes '(tex-mode LaTeX-mode prog-mode))
     :config (minimap-mode 1))
-#+end_src
++end_src
 This function could probably be fiddled with as the tiny text is
 really, really tiny.
 *** Package Org-mode Fancy Bullets - Pretty Bullets for Org mode
