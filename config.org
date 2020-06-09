@@ -125,6 +125,7 @@ The four machines of interest are:
 - iMac - Psychology (psychol-ford)
 - Avantek desktop ()
 - Dell Latitude E5500 laptop (ziggy-latitude)
+- Dell Latitude E5570 laptop (ziggy-latitude2)
 - Raspberry Pi 2B (ziggypi)
 
 Emacs can select code to run on the basis of system name using a
@@ -134,18 +135,21 @@ variable is obsolete in Emacs after version 25.1. Use (system-name)
 instead.
 
 #+begin_src emacs-lisp
-  ;; ziggy-latitude - my home laptop:
-  (if (string=(system-name) "ziggy-latitude")
-      (setq initial-scratch-message
-	    "I use Emacs, which might be thought of as a thermonuclear word processor.\n\n\tNeal Stephenson - In the Beginning... Was the Command Line"))
-  ;; psychol-ford (Psychology)
-  (if (string=(system-name) "psychol-ford")
-      (setq initial-scratch-message
-	    "'Space,' it says,'is big. Really big. You just won't believe how vastly, hugely, mindbogglingly big it is.\nI mean, you may think it's a long way down the road to the chemist, but that's just peanuts to space.'\n\nHitch Hiker's Guide To The Galaxy\n\t Douglas Adams."))
-  ;; plantsci-cowin01
-  (if (string=(system-name) "plantsci-cowin01")
-      (setq initial-scratch-message
-	    "The most exciting phrase to hear in science, the one that heralds the most discoveries is\nnot 'Eureka!' (I have found it!) but 'That's funny...'\n\nIsaac Asimov"))
+      ;; ziggy-latitude - my home laptop:
+      (if (string=(system-name) "ziggy-latitude")
+	  (setq initial-scratch-message
+		"I use Emacs, which might be thought of as a thermonuclear word processor.\n\n\tNeal Stephenson - In the Beginning... Was the Command Line"))
+      ;; psychol-ford (Psychology)
+      (if (string=(system-name) "psychol-ford")
+	  (setq initial-scratch-message
+		"'Space,' it says,'is big. Really big. You just won't believe how vastly, hugely, mindbogglingly big it is.\nI mean, you may think it's a long way down the road to the chemist, but that's just peanuts to space.'\n\nHitch Hiker's Guide To The Galaxy\n\t Douglas Adams."))
+      ;; plantsci-cowin01
+      (if (string=(system-name) "plantsci-cowin01")
+	  (setq initial-scratch-message
+		"The most exciting phrase to hear in science, the one that heralds the most discoveries is\nnot 'Eureka!' (I have found it!) but 'That's funny...'\n\nIsaac Asimov"))
+      (if (string=(system-name) "ziggy-latitude2")
+	  (setq initial-scratch-message
+		"'This must be Thursday,' said Arthur to himself, sinking low over his beer. 'I never could get the hang of Thursdays.'\n\n\tDouglas Adams, Hitch Hiker's Guide to the Galaxy."))
 #+end_src
 *** Built-in Customisations - Set Default Major Mode to Text.
 Some of the customisations made in this file don't get applied unless
@@ -493,7 +497,7 @@ the text. It can be useful to see the 'shape' of the file. This
 switches on the function for TeX, LaTeX and Programming.
 
 +begin_src emacs-lisp
-  (use-package minimap			; Minimap mode
+(use-package minimap		; Minimap mode
     :config (setq minimap-major-modes '(tex-mode LaTeX-mode prog-mode))
     :config (minimap-mode 1))
 +end_src
