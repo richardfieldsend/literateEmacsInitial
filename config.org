@@ -705,6 +705,14 @@ file types.
   (use-package all-the-icons-dired
 		:config (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
 #+end_src
+You do need to run the following command to make it work (within
+Emacs):
+M-x all-the-icons-install-fonts
+
+As you would expect, this installs the fonts required to make the
+pretty icons work! The full github repository for this is here:
+
+https://github.com/domtronn/all-the-icons.el
 
 *** Package YaSnippet - Snippets to save you typing.
 Snippets are a way of adding text using templates which can then move
@@ -877,6 +885,21 @@ the one I started of using and have stuck with is AuCTeX.
 
 AuCTeX provides support for writing multi-part documents, package
 selection and lots of other useful things.
+
+Notes on usage.
+
+The most useful shortcuts for this are:
+
+C-c C-e : Insert environment. When first starting the document it
+works to create the appropriate framework for the document including
+begin and end.
+
+C-c C-s : Insert a section. The section types appropriate for the
+document type are listed. This is followed by the RefTeX function to
+add a label.
+
+C-c C-m : Insert a macro. Helm filtering available.
+
 #+begin_src emacs-lisp
   (use-package tex
     :ensure auctex
